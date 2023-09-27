@@ -54,11 +54,11 @@ func handleASCII(w http.ResponseWriter, r *http.Request) string {
 
 	input := r.FormValue("fname")
 	// Retrieve the selected banner option from the request
-	bannerOption  := r.FormValue("banner")
-	if bannerOption == ""{
+	bannerOption := r.FormValue("banner")
+	if bannerOption == "" {
 		// Return an error message if the banner file cannot be read
 		http.ServeFile(w, r, "template/error3.html")
-		return ""	
+		return ""
 	}
 
 	banner := ""
@@ -71,9 +71,6 @@ func handleASCII(w http.ResponseWriter, r *http.Request) string {
 		banner = "standard.txt"
 	}
 
-	if banner == ""{
-		http.Error(w,"asdf",http.StatusInternalServerError)
-	}
 	input = strings.ReplaceAll(input, "\r\n", "\\n")
 	lines := strings.Split(input, "\\n")
 

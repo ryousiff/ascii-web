@@ -10,6 +10,7 @@ import (
 type Art struct {
 	Output string
 	Color  string
+	Back   string
 }
 
 func main() {
@@ -73,10 +74,12 @@ func asciipage(w http.ResponseWriter, r *http.Request) {
 	// Perform the ASCII art conversion using handleASCII function
 	theTEXT := handleASCII(w, r)
 	picker := r.FormValue("colorPicker")
+	BackGroundColor := r.FormValue("background")
 
 	// Create an instance of Art struct to hold the ASCII art
 	art := Art{Output: theTEXT,
-		Color: picker}
+		Color: picker,
+		Back:  BackGroundColor}
 
 	// Parse and execute the "webhtml.html" template with the art data
 	tmplt, err := template.ParseFiles("webhtml.html")
