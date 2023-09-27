@@ -38,9 +38,7 @@ button {
     margin-top: 20px;
     margin-bottom: 20px;
     border-radius: 30px;
-    width: 300%;
-    height: 500px;
     resize: both;
     white-space: pre;
-
+    width: 300%;
 }
