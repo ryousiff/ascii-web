@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ascii-web</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+
+
+</head>
+
+<body>
+  <div>
+    <article>
+      <header>
+        <h1>ASCII WEB</h1>
+        <h6>BY RAWAN AND FATIMA</h6>
+      </header>
+    </article>
+  </div>
+  <form action="/ascii-art" method="post">
+    <label for="inputbox">Please enter your text:<br /> </label>
+    <textarea id="inputbox" name="fname" rows="5"></textarea><br />
+    <br>
+    <label for="colorPicker">Select a color:</label>
+    <input type="color" id="colorPicker" name="colorPicker" value="#ff0000">
+    <br><br>
+    <input type="radio" name="banner" id="banner" value="standard" />
+    <label for="banner">standard</label>
+    <input type="radio" name="banner" value="shadow" />
+    <label for="banner">shadow</label>
+    <input type="radio" name="banner" value="thinkertoy" />
+    <label for="banner">thinkertoy</label>
+    <br><br>
+    <button type="submit">submit</button>
+  </form>
+  <textarea style="color:{{ .Color }}" id="outputbox" disabled="true">{{ .Output }}</textarea>
+</body>
+</html>
