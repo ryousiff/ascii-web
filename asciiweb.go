@@ -44,15 +44,20 @@ func csserror(w http.ResponseWriter, r *http.Request) {
 
 func serveHome(w http.ResponseWriter, r *http.Request) {
 	// Check if the URL path is not "/"
+	
+
 	if r.URL.Path != "/" {
+		
 		w.WriteHeader(http.StatusNotFound)
 		// Serve the "error.html" file
 		http.ServeFile(w, r, "template/error.html")
 		return
 	}
+	 
 
 	if r.Method != http.MethodGet {
 		// http.Error(w, "Method not Allowed", http.StatusMethodNotAllowed)
+		
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		http.ServeFile(w, r, "template/error1.html")
 		return
@@ -62,7 +67,7 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 	tmplt, err := template.ParseFiles("webhtml.html")
 	if err != nil {
 		// http.Error(w, "Failed to parse template", http.StatusInternalServerError)
-		w.WriteHeader(505)
+		w.WriteHeader(http.StatusInternalServerError)
 		http.ServeFile(w, r, "template/error2.html")
 		return
 	}
@@ -70,12 +75,20 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 }
 
 func asciipage(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		http.ServeFile(w, r, "template/error.html")
+		return
+	} else {
+
+	
 	// Your existing code for handling the ASCII art conversion
 	// Perform the ASCII art conversion using handleASCII function
 	theTEXT := handleASCII(w, r)
 	picker := r.FormValue("colorPicker")
 	BackGroundColor := r.FormValue("background")
 
+	
 	// Create an instance of Art struct to hold the ASCII art
 	art := Art{Output: theTEXT,
 		Color: picker,
@@ -90,4 +103,6 @@ func asciipage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	tmplt.Execute(w, art)
+}
+
 }
